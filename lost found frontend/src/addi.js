@@ -1,5 +1,5 @@
 import React from 'react';
-import { serverurl } from "./config"
+import { serverurl ,apikey } from "./config"
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 var axios = require('axios');
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
@@ -137,15 +137,15 @@ class Addi extends React.Component {
                         <label className="element-label ele-l">Mark Location on map</label>
                     </div>
                         <div className="form-map" style={{
-                            width: "600px",
-                            height: "300px",
+                            width: "350px",
+                            height: "200px",
                             position: "relative",
                         }}>
                             <Map
                                 google={this.props.google}
                                 style={{
-                                    width: "600px",
-                                    height: "300px",
+                                    width: "350px",
+                                    height: "200px",
                                 }}
                                 initialCenter={this.state.fields.location}
                                 center={this.state.fields.location}
@@ -171,5 +171,5 @@ class Addi extends React.Component {
 }
 
 export default GoogleApiWrapper({
-    apiKey: ('AIzaSyDEy1drjhAp2xSyt0PRcaHEJfAUdiGqNUY')
+    apiKey: (apikey)
 })(Addi)

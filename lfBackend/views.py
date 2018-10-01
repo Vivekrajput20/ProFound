@@ -17,9 +17,6 @@ class sign_up(generics.CreateAPIView):
 		serializer.save()
 
 class ItemViewSet(viewsets.ModelViewSet):
-    """
-    ModelViewSet to list, detail, add, edit and delete the item products
-    """
     authentication_classes = (
         TokenAuthentication,
         SessionAuthentication
@@ -32,9 +29,6 @@ class ItemViewSet(viewsets.ModelViewSet):
     serializer_class = ItemSerializer
 
 class IViewSet(viewsets.ModelViewSet):
-    """
-    ModelViewSet to list, detail, add, edit and delete the item products
-    """
     authentication_classes = (
         TokenAuthentication,
         SessionAuthentication
@@ -47,9 +41,6 @@ class IViewSet(viewsets.ModelViewSet):
     serializer_class = ISerializer
 
 class UsrViewSet(viewsets.ModelViewSet):
-    """
-    ModelViewSet to list, detail, add, edit and delete the usr products
-    """
     authentication_classes = (
         TokenAuthentication,
         SessionAuthentication
@@ -63,8 +54,5 @@ class UsrViewSet(viewsets.ModelViewSet):
 
 
 class TokenViewSet(viewsets.ModelViewSet):
-    """
-    ModelViewSet to list, detail, add, edit and delete the usr products
-    """
     queryset = Token.objects.all()
     serializer_class = TokenSerializer

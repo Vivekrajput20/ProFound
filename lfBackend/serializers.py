@@ -30,48 +30,24 @@ class UserSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ( 'username', 'email', 'password' , 'first_name', 'last_name', 'phone')
 class UsrSerializer(serializers.ModelSerializer):
-    """
-    Serializer to serialize the sale product model
-    """    
     class Meta:
-        """
-        Details of the fields included in the serializer
-        """
         model = CustomUser
         exclude = ('password', 'last_login')
         read_only_fields = ('id','is_superuser', 'date_joined')
 
-class ItemSerializer(serializers.ModelSerializer):
-    """
-    Serializer to serialize the sale product model
-    """    
+class ItemSerializer(serializers.ModelSerializer):  
     class Meta:
-        """
-        Details of the fields included in the serializer
-        """
         model = item
         fields = '__all__'
 class ISerializer(serializers.ModelSerializer):
     username = UsrSerializer()
-    """
-    Serializer to serialize the sale product model
-    """    
     class Meta:
-        """
-        Details of the fields included in the serializer
-        """
         model = item
         fields = '__all__'
 
 class TokenSerializer(serializers.ModelSerializer):
-    user = UsrSerializer()
-    """
-    Serializer to serialize the sale product model
-    """    
+    user = UsrSerializer()  
     class Meta:
-        """
-        Details of the fields included in the serializer
-        """
         model = Token
         fields = ('user', 'created')
         read_only_fields = ('key', 'user', 'created')
