@@ -25,6 +25,7 @@ class ItemViewSet(viewsets.ModelViewSet):
         IsAuthenticatedOrReadOnly,
         IsOwnerOrReadOnly,
     )
+    print(item.__name__)
     queryset = item.objects.all()
     serializer_class = ItemSerializer
 

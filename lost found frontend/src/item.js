@@ -23,10 +23,8 @@ export default class Item extends React.Component {
             .then((response) => {
                 this.setState({obj:response.data,
                 usr:response.data.username})
-                console.log(response.data)
             })
             .catch(function (error) {
-                console.log(error.response)
             })
     }
 
@@ -56,7 +54,7 @@ export default class Item extends React.Component {
                 <div className="item-detail"></div>
             </div>
             <div className="item-grp">
-            <img src={this.state.obj.upload} className="img-item" />
+            <img src={this.state.obj.upload} alt='item' className="img-item" />
             </div>
             
             </div>

@@ -7,7 +7,7 @@ import Addi from "./addi.js"
 import Track from "./track.js"
 import Item from "./item.js"
 import './styles/home.css'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 var axios = require('axios');
 var React = require('react')
 class Home extends React.Component {
@@ -39,7 +39,6 @@ class Home extends React.Component {
 				this.setState({ cusrs: [...this.state.cusrs, ...user.users] })
 			})
 			.catch(function (error) {
-				console.log(error.response)
 			})
 	}
 	getAllUser = () => {
@@ -60,7 +59,6 @@ class Home extends React.Component {
 				this.setState({ users: usr })
 			})
 			.catch(function (error) {
-				console.log(error.response)
 			})
 	}
 	getItems = () => {
@@ -70,7 +68,6 @@ class Home extends React.Component {
 				this.setState({ items: response.data })
 			})
 			.catch(function (error) {
-				console.log(error.response)
 			})
 	}
 	logout = () => {
@@ -87,11 +84,10 @@ class Home extends React.Component {
 							<HomeLeft />
 						</div>
 
-						<Router>
 							<div className="home-center">
 								<Switch>
-									<Route path="/item/:number" component={() => {
-										return (<Item user={this.state.user} token={this.state.token} />)
+									<Route path="/item/:number" component={(params) => {
+										return (<Item user={this.state.user} token={this.state.token} id={params}/>)
 									}} />
 									<Route  path="/additem" component={() => {
 										return (<Addi user={this.state.user} token={this.state.token} />)
@@ -101,7 +97,6 @@ class Home extends React.Component {
 									}} />
 								</Switch>
 							</div>
-						</Router>
 
 						<div className="home-right">
 							<Trusted getUser={this.getUser} getAllUser={this.getAllUser} users={this.state.users} token={this.state.token} cusrs={this.state.cusrs} user={this.state.user} />

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { stat } from 'fs';
+import { Redirect } from 'react-router-dom';
 export default class Track extends React.Component {
     constructor(props) {
         super(props);
@@ -14,7 +13,7 @@ export default class Track extends React.Component {
             track: 0,
             id: 0,
             lost: [],
-            noti:'',
+            noti: '',
         };
     }
     componentDidMount() {
@@ -45,7 +44,7 @@ export default class Track extends React.Component {
                 })
                 if (flag) {
                     item.username.users.map(usr => {
-                        if (this.props.user.id == usr)
+                        if (this.props.user.id === usr)
                             this.setState({ lost: this.state.lost.concat(item) });
                     })
 
@@ -53,9 +52,9 @@ export default class Track extends React.Component {
             }
             else {
                 item.username.users.map(usr => {
-                    if (this.props.user.id == usr)
+                    if (this.props.user.id === usr)
                         item["flag"] = false
-                        this.setState({ lost: this.state.lost.concat(item) });
+                    this.setState({ lost: this.state.lost.concat(item) });
                 })
             }
         }
@@ -71,7 +70,6 @@ export default class Track extends React.Component {
             (position) => {
                 let lat = position.coords.latitude
                 let lng = position.coords.longitude
-                // console.log("getCurrentPosition Success " + lat + " and " + lng) // logs position correctly
                 this.setState({
                     location: {
                         lat: lat,
@@ -85,15 +83,13 @@ export default class Track extends React.Component {
                     }
                     )
                     let newlost = []
-                    this.state.lost.map((item)=>{
-                          if(!item.flag){
-                             this.sendnotif(item)
-                             item.flag=true
-                         }
-                         newlost.push(item)
+                    this.state.lost.map((item) => {
+                        if (!item.flag) {
+                            this.sendnotif(item)
+                            item.flag = true
+                        }
+                        newlost.push(item)
                     })
-                    // // this.setState({lost:[...newlost]})
-                    // console.log(this.state.lost)
                 }
                 )
             },
@@ -105,7 +101,6 @@ export default class Track extends React.Component {
         )
     }
     sendnotif = (obj) => {
-        var that = this;
         var options = { body: 'Click To View' };
         if (!("Notification" in window)) {
             alert("This browser does not support desktop notification");
@@ -117,10 +112,10 @@ export default class Track extends React.Component {
                 "Your friend " + obj.username.username + " has lost " + obj.name + " nearby. Help him find it.", options);
             notification.onclick = (event) => {
                 event.preventDefault();
-                this.setState({ redirect: true ,
-                    noti: obj.id 
-                 });
-                console.log(this.state.redirect)
+                this.setState({
+                    redirect: true,
+                    noti: obj.id
+                });
             }
         }
         // Otherwise, we need to ask the user for permission
@@ -131,7 +126,6 @@ export default class Track extends React.Component {
                     var notification = new Notification("Hi there!", options);
                     notification.onclick = function (event) {
                         event.preventDefault();
-                        console.log('On CLick');
                         this.setState({ redirect: true });
 
                     }
@@ -141,16 +135,15 @@ export default class Track extends React.Component {
     }
     render() {
         if (this.state.redirect) {
-            return <Redirect to={'/item/'+ this.state.noti + ''} ></Redirect>
+            return <Redirect to={'/item/' + this.state.noti + ''} ></Redirect>
         }
-        const location = this.state.location
         if (this.state.track === 0)
             return (
                 <div className="center-panel">
                     <div className="center-text">
-                    Lost something? Fret not! We are here to help you out. Find Your lost items with the assurance that they will be found by someone you trust.
-                    <br/><br></br>
-                    We need your location permission to help you!
+                        Lost something? Fret not! We are here to help you out. Find Your lost items with the assurance that they will be found by someone you trust.
+                    <br /><br></br>
+                        We need your location permission to help you!
                     </div>
                     <button className="item-submit" onClick={() => {
                         var id = setInterval(this.getLocation, 5000);
@@ -161,12 +154,12 @@ export default class Track extends React.Component {
         else {
             return (
                 <div className="center-panel">
-                <div className="center-text">
-                    Lost something? Fret not! We are here to help you out. Find Your lost items with the assurance that they will be found by someone you trust.
-                    <br/><br></br>
-                    We need your location permission to help you!
+                    <div className="center-text">
+                        Lost something? Fret not! We are here to help you out. Find Your lost items with the assurance that they will be found by someone you trust.
+                    <br /><br></br>
+                        We need your location permission to help you!
                     </div>
-                <button className="item-submit" onClick={this.disableTrack}>Stop Tracking</button></div>
+                    <button className="item-submit" onClick={this.disableTrack}>Stop Tracking</button></div>
             )
         }
     }

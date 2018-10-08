@@ -4,21 +4,21 @@ export default class HomeLeft extends React.Component {
     render() {
         return (
             <div className="left-panel">
-                <a href='/profile'>
+                <Link to='/profile'>
                     <div className="left-btn">
                         Profile
                         </div>
-                </a>
-                <a href='/'>
+                </Link>
+                <Link to='/'>
                 <div className="left-btn">
                     Home
                         </div>
-            </a>
-                <a href='/additem'>
+            </Link>
+                <Link to='/additem'>
                     <div className="left-btn">
                         Lost Something?
                         </div>
-                </a>
+                </Link>
 
             </div>
         )

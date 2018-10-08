@@ -1,8 +1,7 @@
 import React from 'react';
 import { serverurl ,apikey } from "./config"
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react';
 var axios = require('axios');
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
 class Addi extends React.Component {
     constructor() {
         super();
@@ -52,13 +51,11 @@ class Addi extends React.Component {
             }
         })
             .then((response) => {
-                console.log(response.data)
                 this.setState({
                     success:"Item Added Successfully"
                 })
             })
             .catch((error) => {
-                console.log(error.response.data)
             });
     };
     async componentDidMount() {
@@ -105,7 +102,7 @@ class Addi extends React.Component {
                 ...prev.fields,
                 location
             }
-        }), console.log("lat : " + this.state.fields.location));
+        }));
         map.panTo(location);
     };
 

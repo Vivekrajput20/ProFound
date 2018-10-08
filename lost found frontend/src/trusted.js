@@ -26,8 +26,7 @@ export default class Trusted extends React.Component {
                                         this.props.getUser(this.props.token)
                                         this.props.getAllUser()
                                     })
-                                    .catch(function (error) {
-                                        console.log(error.response);
+                                    .catch((error)=>{
                                     });
                             }} className="t-username">Add {x.username}</button>
                         </div>
